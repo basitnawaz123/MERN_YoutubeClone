@@ -1,0 +1,19 @@
+.menu_link{
+    display: flex;
+    align-items: center;
+    padding: 12px 25px
+}
+
+.menu_link:hover{
+    background-color: #e5e5e5;
+    cursor: pointer;
+}
+.menu_link span{
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.menu_link i{
+    font-size: 25px;
+}

@@ -1,0 +1,23 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 15px
+}
+
+.header_left{
+    display: flex;
+    align-items: center;
+}
+
+.header_left img{
+    width: 150px;
+}
+
+.header i{
+padding: 0 7px;
+cursor: pointer;
+font-size: 30px;
+}
+

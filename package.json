@@ -1,0 +1,19 @@
+{
+  "name": "mern_youtubeclone",
+  "version": "1.0.0",
+  "description": "Youtube Clone using React Node and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsbasit/MERN_YoutubeClone.git"
+  },
+  "author": "Basit Nawaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsbasit/MERN_YoutubeClone/issues"
+  },
+  "homepage": "https://github.com/itsbasit/MERN_YoutubeClone#readme"
+}

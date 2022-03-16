@@ -1,0 +1,27 @@
+.search_form{
+    border: 1px solid #ddd;
+    height: 35px;
+    margin: 0;
+    padding: 0;
+    display: flex
+}
+
+.search_form input {
+    width: 500px;
+    padding: 10px;
+    border-radius: 0;
+    border: none;
+}
+
+.search_form input:focus{
+    border: 1px solid #ddd;
+}
+
+.search_form button{
+    padding: 8px 20px;
+    margin: 0;
+    border-radius: 0px;
+    border: none;
+    height: 100%;
+    font-size: 20px;
+}
