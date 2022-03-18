@@ -1,148 +1,43 @@
 import React, { Fragment } from "react";
 import "./style.css";
+import Moment from "moment";
+import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = (props) => {
+  const data = props.videos;
+
   return (
     <Fragment>
-      <article className='video-container'>
-        <a href='#' className='thumbnail' data-duration='12:24'>
-          <img
-            className='thumbnail-image'
-            src='http://unsplash.it/250/150?gravity=center'
-          />
-        </a>
-        <div className='video-bottom-section'>
-          <a href='#'>
-            <img
-              className='channel-icon'
-              src='http://unsplash.it/36/36?gravity=center'
-            />
-          </a>
-          <div className='video-details'>
-            <a href='#' className='video-title'>
-              Video Title
-            </a>
-            <a href='#' className='video-channel-name'>
-              Channel Name
-            </a>
-            <div className='video-metadata'>
-              <span>12K views</span>•<span>1 week ago</span>
-            </div>
-          </div>
-        </div>
-      </article>
+      {data &&
+        data.map((item) => {
+          return (
+            <article key={item._id} className='video-container'>
+              <Link to={`/video/${item._id}`}>
+                <div className='thumbnail' data-duration='12:24'>
+                  <img
+                    className='thumbnail-image'
+                    src={`/videos/${item.thumbnail}`}
+                  />
+                </div>
+                <div className='video-bottom-section'>
+                  <img
+                    className='channel-icon'
+                    src={`/videos/${item.thumbnail}`}
+                  />
 
-      <article className='video-container'>
-        <a href='#' className='thumbnail' data-duration='12:24'>
-          <img
-            className='thumbnail-image'
-            src='http://unsplash.it/250/150?gravity=center'
-          />
-        </a>
-        <div className='video-bottom-section'>
-          <a href='#'>
-            <img
-              className='channel-icon'
-              src='http://unsplash.it/36/36?gravity=center'
-            />
-          </a>
-          <div className='video-details'>
-            <a href='#' className='video-title'>
-              Video Title
-            </a>
-            <a href='#' className='video-channel-name'>
-              Channel Name
-            </a>
-            <div className='video-metadata'>
-              <span>12K views</span>• <span>1 week ago</span>
-            </div>
-          </div>
-        </div>
-      </article>
+                  <div className='video-details'>
+                    <div className='video-title'>{item.title}</div>
 
-      <article className='video-container'>
-        <a href='#' className='thumbnail' data-duration='12:24'>
-          <img
-            className='thumbnail-image'
-            src='http://unsplash.it/250/150?gravity=center'
-          />
-        </a>
-        <div className='video-bottom-section'>
-          <a href='#'>
-            <img
-              className='channel-icon'
-              src='http://unsplash.it/36/36?gravity=center'
-            />
-          </a>
-          <div className='video-details'>
-            <a href='#' className='video-title'>
-              Video Title
-            </a>
-            <a href='#' className='video-channel-name'>
-              Channel Name
-            </a>
-            <div className='video-metadata'>
-              <span>12K views</span>•<span>1 week ago</span>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article className='video-container'>
-        <a href='#' className='thumbnail' data-duration='12:24'>
-          <img
-            className='thumbnail-image'
-            src='http://unsplash.it/250/150?gravity=center'
-          />
-        </a>
-        <div className='video-bottom-section'>
-          <a href='#'>
-            <img
-              className='channel-icon'
-              src='http://unsplash.it/36/36?gravity=center'
-            />
-          </a>
-          <div className='video-details'>
-            <a href='#' className='video-title'>
-              Video Title
-            </a>
-            <a href='#' className='video-channel-name'>
-              Channel Name
-            </a>
-            <div className='video-metadata'>
-              <span>12K views</span>•<span>1 week ago</span>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article className='video-container'>
-        <a href='#' className='thumbnail' data-duration='12:24'>
-          <img
-            className='thumbnail-image'
-            src='http://unsplash.it/250/150?gravity=center'
-          />
-        </a>
-        <div className='video-bottom-section'>
-          <a href='#'>
-            <img
-              className='channel-icon'
-              src='http://unsplash.it/36/36?gravity=center'
-            />
-          </a>
-          <div className='video-details'>
-            <a href='#' className='video-title'>
-              Video Title
-            </a>
-            <a href='#' className='video-channel-name'>
-              Channel Name
-            </a>
-            <div className='video-metadata'>
-              <span>12K views</span>•<span>1 week ago</span>
-            </div>
-          </div>
-        </div>
-      </article>
+                    <div className='video-metadata'>
+                      <span>12K views</span>•
+                      <span>{Moment(item.createdAt).format("YYYY-MM")}</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </article>
+          );
+        })}
     </Fragment>
   );
 };

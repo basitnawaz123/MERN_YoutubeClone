@@ -5,6 +5,7 @@ import "./style.css";
 
 import { Routes, Route } from "react-router-dom";
 import UploadVideo from "../../../screens/UploadVideo";
+import SingleVideo from "../../../screens/SingleVideo";
 
 const Dashboard = () => {
   return (
@@ -13,6 +14,7 @@ const Dashboard = () => {
         <Sidebar />
         <Routes>
           <Route path='/' element={<VideosGrid />} exact />
+          <Route path='/video/:id' element={<SingleVideo />} exact />
           <Route path='/upload' element={<UploadVideo />} exact />
         </Routes>
       </div>

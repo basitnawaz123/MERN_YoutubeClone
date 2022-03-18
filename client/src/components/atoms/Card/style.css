@@ -1,12 +1,12 @@
 .video-container {
  width: 300px;
- margin: 0 10px;
+ margin: 10px 10px;
   }
   
   .thumbnail {
     position: relative;
     display: flex;
-    
+    height: 200px;
   }
   
   .thumbnail::before {
