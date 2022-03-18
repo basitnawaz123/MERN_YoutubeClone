@@ -1,46 +1,66 @@
-import React, { Fragment } from "react";
-import InputField from "../atoms/Inputs";
-import Button from "../atoms/Buttons";
+import React, { Fragment, useState } from "react";
+// import InputField from "../atoms/Inputs";
+// import Button from "../atoms/Buttons";
+import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
+import Label from "../atoms/Label";
 
 const UploadVideo = () => {
-  function handleSubmit(e) {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [video, setVideo] = useState("");
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let video_title = e.target.video_title.value;
-    let thumbnail = e.target.thumbnail.thumbnail;
-    let video = e.target.video.value;
 
-    console.log(video_title);
-    console.log(thumbnail);
-    console.log(video);
-  }
+    const data = new FormData();
+    data.append("title", title);
+    data.append("thumbnail", thumbnail);
+    data.append("video", video);
+
+    const result = await axios.post("http://localhost:4000/api/videos", data);
+    if (result.status === 200) {
+      alert(result.data.message);
+      return navigate("/");
+    }
+  };
 
   return (
     <Fragment>
       <div className='upload_section'>
         <form onSubmit={handleSubmit} method='post'>
-          <InputField
-            placeholder='Video Title'
+          <Label text='Enter video title' />
+          <input
             className='form-control'
-            value=''
             type='text'
-            name='video_title'
-            onChange='handleChange'
+            id='title'
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
 
-          <InputField
-            name='thumbnail'
+          <Label text='Select video Thumbnail' />
+          <input
             className='form-control'
-            value=''
             type='file'
+            id='thumbnail'
+            onChange={(e) => {
+              setThumbnail(e.target.files[0]);
+            }}
           />
-          <InputField
-            name='video'
+          <Label text='Select Video to Upload' />
+          <input
             className='form-control'
-            value=''
             type='file'
+            id='video'
+            onChange={(e) => {
+              setVideo(e.target.files[0]);
+            }}
           />
 
-          <Button type='submit' text='Upload Video' variant='red' />
+          <button type='submit' className='btn red'>
+            Upload Video
+          </button>
         </form>
       </div>
     </Fragment>
