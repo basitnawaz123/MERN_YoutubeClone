@@ -14,15 +14,12 @@ const SearchForm = () => {
       `http://localhost:4000/api/search?q=${search}`
     );
     setData({ data: result.data });
-
-    // console.log("search:::::::::::", data);
   };
 
   useEffect(() => {
     fetchData();
   }, [search]);
 
-  // console.log(data.data);
 
   return (
     <Fragment>

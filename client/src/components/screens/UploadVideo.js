@@ -13,16 +13,25 @@ const UploadVideo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("title", title);
-    data.append("thumbnail", thumbnail);
-    data.append("video", video);
+    if (title === "") {
+      alert("Please enter video title");
+    } else if (thumbnail === "") {
+      alert("Please choose thumbnail");
+    } else if (video === "") {
+      alert("Please choose video");
+    } else {
+      const data = new FormData();
+      data.append("title", title);
+      data.append("thumbnail", thumbnail);
+      data.append("video", video);
 
-    const result = await axios.post("http://localhost:4000/api/videos", data);
-    if (result.status === 200) {
-      alert(result.data.message);
-      return navigate("/");
+      const result = await axios.post("http://localhost:4000/api/videos", data);
+      if (result.status === 200) {
+        alert(result.data.message);
+        return navigate("/");
+      }
     }
+   
   };
 
   return (
