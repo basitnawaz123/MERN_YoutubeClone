@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "./style.css";
 import Moment from "moment";
 import { Link } from "react-router-dom";
+import Image from "../Image";
 
 const Card = (props) => {
   const data = props.videos;
@@ -14,15 +15,15 @@ const Card = (props) => {
             <article key={item._id} className='video-container'>
               <Link to={`/video/${item._id}`}>
                 <div className='thumbnail' data-duration='12:24'>
-                  <img
-                    className='thumbnail-image'
-                    src={`/videos/${item.thumbnail}`}
+                  <Image
+                    class='thumbnail-image'
+                    src={`videos/${item.thumbnail}`}
                   />
                 </div>
                 <div className='video-bottom-section'>
-                  <img
-                    className='channel-icon'
-                    src={`/videos/${item.thumbnail}`}
+                  <Image
+                    class='channel-icon'
+                    src={`videos/${item.thumbnail}`}
                   />
 
                   <div className='video-details'>
