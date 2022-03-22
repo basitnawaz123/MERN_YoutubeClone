@@ -16,10 +16,17 @@ const VideosSchema = mongoose.Schema(
       type: String,
       require: [true, "Please select video"],
     },
+
+    tags: [
+      {
+        type: String,
+        require: [true, "Please add tags"],
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = videos = mongoose.model("videos", VideosSchema);
+module.exports = videos = mongoose.model("videos", VideosSchema, "videos");

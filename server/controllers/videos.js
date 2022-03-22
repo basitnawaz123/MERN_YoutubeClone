@@ -1,7 +1,9 @@
 const express = require("express");
 const videoModel = require("../models/Videos");
+const LikeModel = require("../models/LikeVideo");
 var path = require("path");
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 const uploadVideo = (req, res) => {
   try {
@@ -12,6 +14,7 @@ const uploadVideo = (req, res) => {
       title: title,
       thumbnail: thumbnail.filename,
       video: video.filename,
+      tags: req.body.tags.split(","),
     });
     videoData.save();
     res.status(200).json({ message: "Video Uploaded Successfully" });
@@ -22,7 +25,9 @@ const uploadVideo = (req, res) => {
 
 const listVideos = async (req, res) => {
   try {
-    const result = await videoModel.find({});
+    const result = await videoModel.find({}).sort({
+      createdAt: -1,
+    });
     if (result.length > 0) {
       res.status(200).send(result);
     } else {
@@ -49,9 +54,35 @@ const searchVideo = (req, res) => {
   videoModel.find({ title: query }).then((result) => res.send(result));
 };
 
+const likeVideo = async (req, res) => {
+  const { video_id, like } = req.body;
+
+  const result = await LikeModel.findOne({ video: video_id });
+
+  if (!result) {
+    let data = new LikeModel({
+      like: like,
+      video: video_id,
+    });
+    await data.save();
+    res.status(200).json({ message: "Liked" });
+  }
+};
+
+const fetchLikedVideos = async (req, res) => {
+  try {
+    const result = await LikeModel.find({}).populate("video");
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
 module.exports = {
   uploadVideo,
   listVideos,
   searchVideo,
   singleVideo,
+  likeVideo,
+  fetchLikedVideos,
 };

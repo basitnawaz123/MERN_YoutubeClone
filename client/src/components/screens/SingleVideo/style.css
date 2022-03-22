@@ -1,0 +1,17 @@
+/* .singl_video{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.singl_video video{
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+.singl_video video{
+    padding-bottom: 15px;
+}

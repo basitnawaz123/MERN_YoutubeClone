@@ -1,0 +1,12 @@
+
+.upload_section{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding-top: 5%;
+}
+
+.upload_section .btn{
+    width: 100%;
+}

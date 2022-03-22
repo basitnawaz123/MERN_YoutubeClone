@@ -2,41 +2,56 @@ import React, { Fragment } from "react";
 import "./style.css";
 import Moment from "moment";
 import { Link } from "react-router-dom";
-import Image from "../Image";
 
 const Card = (props) => {
-  const data = props.videos;
+  const { layout, source, videos, likedVideos } = props;
 
   return (
     <Fragment>
-      {data &&
-        data.map((item) => {
+      {videos &&
+        videos.map((item) => {
           return (
-            <article key={item._id} className='video-container'>
-              <Link to={`/video/${item._id}`}>
-                <div className='thumbnail' data-duration='12:24'>
-                  <Image
-                    class='thumbnail-image'
-                    src={`videos/${item.thumbnail}`}
-                  />
-                </div>
-                <div className='video-bottom-section'>
-                  <Image
-                    class='channel-icon'
-                    src={`videos/${item.thumbnail}`}
-                  />
+            <Link to={`/video/${item._id}`} key={item.title}>
+              {layout == "grid" ? (
+                <div className='videos__container'>
+                  <div className='video'>
+                    <div className='video__thumbnail'>
+                      <img src={`/videos/${item.thumbnail}`} />
+                    </div>
+                    <div className='video__details'>
+                      <div className='author'>
+                        <img src={`/videos/${item.thumbnail}`} />
+                      </div>
 
-                  <div className='video-details'>
-                    <div className='video-title'>{item.title}</div>
+                      <div className='title'>
+                        <h3>{item.title}</h3>
 
-                    <div className='video-metadata'>
-                      <span>12K views</span>•
-                      <span>{Moment(item.createdAt).format("YYYY-MM")}</span>
+                        <span>
+                          10M Views • {Moment(item.createdAt).format("YYYY-MM")}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </Link>
-            </article>
+              ) : (
+                <div className='videos__container'>
+                  <div className='video_list'>
+                    <div className='video_list__thumbnail'>
+                      <img src={`/videos/${item.thumbnail}`} />
+                    </div>
+                    <div className='video_list__details'>
+                      <div className='list_title'>
+                        <h3>{item.title}</h3>
+
+                        <span>
+                          10M Views • {Moment(item.createdAt).format("YYYY-MM")}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </Link>
           );
         })}
     </Fragment>

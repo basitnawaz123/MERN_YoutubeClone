@@ -3,7 +3,7 @@
     padding: 1px;
     flex-wrap: wrap;
     overflow-y: scroll;
-    align-items: center;
+    /* align-items: center; */
     height: 580px;
     width: 1308px;
     

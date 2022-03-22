@@ -1,7 +1,16 @@
 import React, { Fragment } from "react";
 
 import MenuList from "../../atoms/Lists";
-import { MdHome, MdExplore } from "react-icons/md";
+import {
+  MdHome,
+  MdExplore,
+  MdHistory,
+  MdVideoLibrary,
+  MdSubscriptions,
+  MdSmartDisplay,
+  MdWatchLater,
+  MdThumbUp,
+} from "react-icons/md";
 import "./style.css";
 const SidebarMenu = () => {
   const menuItems = [
@@ -21,28 +30,48 @@ const SidebarMenu = () => {
       id: 3,
       icon: <MdExplore />,
       title: "Shorts",
-      link: "",
+      link: "/shorts",
     },
 
     {
       id: 4,
-      icon: <MdExplore />,
+      icon: <MdSubscriptions />,
       title: "Subscriptions",
-      link: "",
+      link: "/subscriptions",
     },
 
     {
       id: 5,
-      icon: <MdExplore />,
+      icon: <MdVideoLibrary />,
       title: "Library",
-      link: "",
+      link: "/library",
     },
 
     {
       id: 6,
-      icon: <MdExplore />,
+      icon: <MdHistory />,
       title: "History",
-      link: "",
+      link: "/history",
+    },
+
+    {
+      id: 7,
+      icon: <MdSmartDisplay />,
+      title: "Your Videos",
+      link: "/your-videos",
+    },
+
+    {
+      id: 8,
+      icon: <MdWatchLater />,
+      title: "Watch Later",
+      link: "/watch-later",
+    },
+    {
+      id: 9,
+      icon: <MdThumbUp />,
+      title: "Liked Videos",
+      link: "/liked",
     },
   ];
   return (

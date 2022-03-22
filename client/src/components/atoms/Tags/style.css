@@ -6,6 +6,7 @@
 
 .tags li{
     padding: 6px 15px;
+    cursor: pointer;
     background: #f2eaea;
     border-radius: 20px;
     color: black;
