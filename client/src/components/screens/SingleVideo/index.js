@@ -7,6 +7,8 @@ import Tag from "../../atoms/Tags";
 import "./style.css";
 
 const SingleVideo = () => {
+  var watchedVideos = JSON.parse(localStorage.getItem("watchedVideos") || "[]");
+
   const [video, SetVideo] = useState({});
   const [tags, SetTags] = useState("");
   let { id } = useParams();
@@ -15,13 +17,14 @@ const SingleVideo = () => {
     const data = await axios.get(`http://localhost:4000/api/videos/${id}`);
     SetVideo({ data: data.data });
     SetTags(data.data.tags);
+    watchedVideos.push(data.data);
+    localStorage.setItem("watchedVideos", JSON.stringify(watchedVideos));
   };
 
   useEffect(() => {
     fetchVideo();
   }, []);
 
-  console.log("tags", tags);
 
   return (
     <Fragment>

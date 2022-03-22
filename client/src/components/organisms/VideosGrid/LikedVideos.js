@@ -22,7 +22,7 @@ const LikedVideos = () => {
           {videos &&
             videos.map((item) => {
               return (
-                <Link to={`/video/${item.video.id}`} key={item.video.title}>
+                <Link to={`/video/${item.video._id}`} key={item.video.title}>
                   <div className='videos__container'>
                     <div className='video'>
                       <div className='video__thumbnail'>

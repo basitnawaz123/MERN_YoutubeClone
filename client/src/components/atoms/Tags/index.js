@@ -1,8 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import axios from "axios";
 import "./style.css";
 const Tag = () => {
-  const searchByTag = (item) => {
-    console.log(item);
+  const [videos, SetVideos] = useState([]);
+  const searchByTag = async (item) => {
+    const result = await axios.get(`http://localhost:4000/api/video/${item}`);
+    if (result.data.length < 1) {
+      alert("no record");
+    } else {
+      SetVideos(result);
+    }
   };
   const items = [
     "All",

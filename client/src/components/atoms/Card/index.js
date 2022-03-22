@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const Card = (props) => {
   const { layout, source, videos, likedVideos } = props;
-
   return (
     <Fragment>
       {videos &&

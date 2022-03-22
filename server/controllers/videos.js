@@ -78,6 +78,17 @@ const fetchLikedVideos = async (req, res) => {
   }
 };
 
+
+const searchByTag = async (req, res) => {
+  try {
+    const { tag } = req.params;
+    const result = await videoModel.find({ tags: tag });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   uploadVideo,
   listVideos,
@@ -85,4 +96,5 @@ module.exports = {
   singleVideo,
   likeVideo,
   fetchLikedVideos,
+  searchByTag,
 };
