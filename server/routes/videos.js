@@ -3,6 +3,9 @@ const {
   uploadVideo,
   searchVideo,
   singleVideo,
+  likeVideo,
+  fetchLikedVideos,
+  searchByTag,
 } = require("../controllers/videos");
 var express = require("express");
 const multer = require("multer");
@@ -38,5 +41,10 @@ router.get("/videos", listVideos);
 router.get("/search", searchVideo);
 router.post("/videos", multipleUploads, uploadVideo);
 router.get("/videos/:id", singleVideo);
+router.post("/video/like", likeVideo);
+router.get("/video/like", fetchLikedVideos);
+router.get("/video/:tag", searchByTag);
+
+
 
 module.exports = router;

@@ -9,6 +9,7 @@ import {
   MdAccountCircle,
 } from "react-icons/md";
 import SearchForm from "../../molecules/Forms/SearchForm";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
@@ -18,10 +19,12 @@ const Navigation = () => {
           <i>
             <MdMenu />
           </i>
-          <img
-            src='https://www.seekpng.com/png/detail/77-772362_youtube-logo-youtube-logo-png.png'
-            alt='logo'
-          />
+          <Link to='/'>
+            <img
+              src='https://www.seekpng.com/png/detail/77-772362_youtube-logo-youtube-logo-png.png'
+              alt='logo'
+            />
+          </Link>
         </div>
 
         <div className='header_search'>

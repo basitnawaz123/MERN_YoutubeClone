@@ -1,0 +1,17 @@
+.video_actions{
+    display: flex;
+    padding: 20px 0px;
+}
+
+.video_actions .heading{
+    flex: 1;
+}
+.video_icon{
+    float: right;
+}
+.video_icon li {
+    display: inline;
+    padding: 12px;
+    font-size: 30px;
+    cursor: pointer;
+  }

@@ -20,7 +20,6 @@ const SearchForm = () => {
     fetchData();
   }, [search]);
 
-
   return (
     <Fragment>
       <form className='search_form'>

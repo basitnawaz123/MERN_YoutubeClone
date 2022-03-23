@@ -16,7 +16,6 @@ const VideosGrid = () => {
     fetchData();
   }, []);
 
-  // console.log(videos.items);
   return (
     <Fragment>
       <div className='home'>
@@ -24,7 +23,7 @@ const VideosGrid = () => {
           <TagsBar />
         </div>
         <div className='videoGrid'>
-          <Card videos={videos.data} />
+          <Card videos={videos.data} layout='grid' />
         </div>
       </div>
     </Fragment>
