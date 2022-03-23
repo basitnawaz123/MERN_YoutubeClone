@@ -4,6 +4,7 @@ import Sidebar from "../../../organisms/sidebar";
 import VideosGrid from "../../../organisms/VideosGrid";
 import LikedVideos from "../../../organisms/VideosGrid/LikedVideos";
 import History from "../../../screens/History";
+import Library from "../../../screens/Library";
 import "./style.css";
 const Dashboard = () => {
   return (
@@ -12,6 +13,7 @@ const Dashboard = () => {
         <Sidebar />
         <Routes>
           <Route path='/' element={<VideosGrid />} />
+          <Route path='/library' element={<Library />} />
           <Route path='/history' element={<History />} />
           <Route path='/liked' element={<LikedVideos />} />
         </Routes>

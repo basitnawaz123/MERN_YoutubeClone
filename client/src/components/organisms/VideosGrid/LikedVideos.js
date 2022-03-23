@@ -15,9 +15,9 @@ const LikedVideos = () => {
   return (
     <Fragment>
       <div className='home'>
-        <div className='tags_bar'>
+        {/* <div className='tags_bar'>
           <TagsBar />
-        </div>
+        </div> */}
         <div className='videoGrid'>
           {videos &&
             videos.map((item) => {
