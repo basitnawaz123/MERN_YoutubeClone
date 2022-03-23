@@ -4,21 +4,26 @@ import { MdSearch } from "react-icons/md";
 import Button from "../../atoms/Buttons";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { SetVideos } from "../../../redux/actions/videoActions";
 
 const SearchForm = () => {
-  const [data, setData] = useState([{}]);
+  // const [data, setData] = useState([{}]);
+  const dispath = useDispatch();
+  const data = useSelector((state) => state.allVideos);
   const [search, setSearch] = useState("");
-  const [isAppear, SetIsAppear] = useState(false);
+  // const [isAppear, SetIsAppear] = useState(false);
   const fetchData = async () => {
     const result = await axios.get(
       `http://localhost:4000/api/search?q=${search}`
     );
-    setData({ data: result.data });
+
+    dispath(SetVideos(result.data));
   };
 
   useEffect(() => {
     fetchData();
-  }, [search]);
+  }, [search.length < 3]);
 
   return (
     <Fragment>
@@ -29,31 +34,10 @@ const SearchForm = () => {
           className='form-control'
           onChange={(e) => {
             setSearch(e.target.value);
-            SetIsAppear(true);
           }}
         />
         <Button variant='danger' icon={<MdSearch />}></Button>
       </form>
-      {isAppear ? (
-        <div className='search_result'>
-          <ul>
-            {data.data &&
-              data.data.map((item) => {
-                return (
-                  <li key={item._id}>
-                    <Link
-                      onClick={(e) => SetIsAppear(false)}
-                      to={`/video/${item._id}`}>
-                      {item.title}
-                    </Link>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-      ) : (
-        ""
-      )}
     </Fragment>
   );
 };
