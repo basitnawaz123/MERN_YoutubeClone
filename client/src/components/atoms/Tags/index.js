@@ -1,15 +1,15 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
 import "./style.css";
+import { useDispatch, useSelector } from "react-redux";
+import { SetVideos } from "../../../redux/actions/videoActions";
+
 const Tag = () => {
-  const [videos, SetVideos] = useState([]);
+  const dispath = useDispatch();
+  const videos = useSelector((state) => state.allVideos);
   const searchByTag = async (item) => {
     const result = await axios.get(`http://localhost:4000/api/video/${item}`);
-    if (result.data.length < 1) {
-      alert("no record");
-    } else {
-      SetVideos(result);
-    }
+    dispath(SetVideos(result.data));
   };
 
   const items = [

@@ -32,8 +32,9 @@ var storage = multer.diskStorage({
     else callback(null, file.fieldname + "-" + Date.now() + file.originalname);
   },
 });
+var maxSize = 5242880;
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage, limits: { filezie: maxSize } });
 
 let multipleUploads = upload.fields([{ name: "thumbnail" }, { name: "video" }]);
 

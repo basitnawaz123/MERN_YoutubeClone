@@ -5,6 +5,7 @@ var path = require("path");
 const fs = require("fs");
 const mongoose = require("mongoose");
 
+
 const uploadVideo = (req, res) => {
   try {
     const thumbnail = req.files.thumbnail[0];
@@ -78,12 +79,21 @@ const fetchLikedVideos = async (req, res) => {
   }
 };
 
-
 const searchByTag = async (req, res) => {
   try {
     const { tag } = req.params;
-    const result = await videoModel.find({ tags: tag });
-    res.status(200).json(result);
+
+    const result = await videoModel.find({ tags: tag }).sort({
+      createdAt: -1,
+    });
+    if (result.length < 1) {
+      const allResult = await videoModel.find({}).sort({
+        createdAt: -1,
+      });
+      res.status(200).json(allResult);
+    } else {
+      res.status(200).json(result);
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

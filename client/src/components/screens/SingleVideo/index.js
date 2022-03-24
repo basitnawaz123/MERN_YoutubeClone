@@ -1,21 +1,21 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import VideoAction from "../../molecules/VideoActions";
-import Tag from "../../atoms/Tags";
 import "./style.css";
+import { ListSingleVideo } from "../../../redux/actions/videoActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const SingleVideo = () => {
-  var watchedVideos = JSON.parse(localStorage.getItem("watchedVideos") || "[]");
-
-  const [video, SetVideo] = useState({});
+  const video = useSelector((state) => state.singleVideo);
+  const dispatch = useDispatch();
   const [tags, SetTags] = useState("");
+  var watchedVideos = JSON.parse(localStorage.getItem("watchedVideos") || "[]");
   let { id } = useParams();
 
   const fetchVideo = async () => {
     const data = await axios.get(`http://localhost:4000/api/videos/${id}`);
-    SetVideo({ data: data.data });
+    dispatch(ListSingleVideo(data));
     SetTags(data.data.tags);
     watchedVideos.push(data.data);
     localStorage.setItem("watchedVideos", JSON.stringify(watchedVideos));
@@ -24,7 +24,6 @@ const SingleVideo = () => {
   useEffect(() => {
     fetchVideo();
   }, []);
-
 
   return (
     <Fragment>
