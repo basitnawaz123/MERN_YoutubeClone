@@ -2,4 +2,11 @@
   color: black;
   text-transform: capitalize;
 font-family: 'Roboto';
+font-size: 14px;
+padding:10px
+}
+
+.label-danger{
+  color: red;
+  font-size: 12px;
 }
