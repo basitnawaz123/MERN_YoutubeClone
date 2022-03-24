@@ -8,11 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { SetVideos } from "../../../redux/actions/videoActions";
 
 const SearchForm = () => {
-  // const [data, setData] = useState([{}]);
+
   const dispath = useDispatch();
   const data = useSelector((state) => state.allVideos);
   const [search, setSearch] = useState("");
-  // const [isAppear, SetIsAppear] = useState(false);
   const fetchData = async () => {
     const result = await axios.get(
       `http://localhost:4000/api/search?q=${search}`
@@ -23,7 +22,7 @@ const SearchForm = () => {
 
   useEffect(() => {
     fetchData();
-  }, [search.length < 3]);
+  }, [search.length > 3]);
 
   return (
     <Fragment>

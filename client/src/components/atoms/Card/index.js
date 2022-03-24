@@ -26,7 +26,12 @@ const Card = (props) => {
                         <h3>{item.title}</h3>
 
                         <span>
-                          10M Views • {Moment(item.createdAt).format("YYYY-MM")}
+                          10M Views •{" "}
+                          {/* {Moment(item.createdAt).format("DD-YYYY-MM")} */}
+                          {Moment(item.createdAt, "YYYYMMDD")
+                            .startOf("day")
+                            .fromNow()}
+                          {/* {Moment().startOf(item.createdAt).fromNow()} */}
                         </span>
                       </div>
                     </div>

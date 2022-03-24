@@ -5,22 +5,31 @@ import Label from "../../atoms/Label";
 import "./style.css";
 
 const UploadVideo = () => {
+
   const navigate = useNavigate();
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [video, setVideo] = useState("");
   const [chips, setChips] = useState("");
+  const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (title === "") {
-      alert("Please enter video title");
+      setError("Please enter video title");
     } else if (thumbnail === "") {
-      alert("Please choose thumbnail");
+      setError("Please choose thumbnail");
+    } else if (thumbnail.size > 2097152) {
+      setError("Thumbnail Size Cannot be greater than 1MB");
     } else if (video === "") {
-      alert("Please choose video");
+      setError("Please choose video");
+    } else if (video.size > 20971520) {
+      setError("Video size cannot be greater than 20MB");
     } else if (chips === "") {
-      alert("Please add some tags");
+      setError("Please add some tags");
     } else {
       const data = new FormData();
       data.append("title", title);
@@ -38,19 +47,20 @@ const UploadVideo = () => {
   return (
     <Fragment>
       <div className='upload_section'>
-        <form onSubmit={handleSubmit} method='post'>
-          <Label text='Enter video title' />
+        <Label variant='label-danger' text={error} />
 
+        <form onSubmit={handleSubmit} method='post'>
           <input
             className='form-control'
             type='text'
             id='title'
+            placeholder='Enter video title'
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
 
-          <Label text='Select video Thumbnail' />
+          <Label variant='label' text='Select video Thumbnail' />
           <input
             className='form-control'
             type='file'
@@ -59,7 +69,8 @@ const UploadVideo = () => {
               setThumbnail(e.target.files[0]);
             }}
           />
-          <Label text='Select Video to Upload' />
+
+          <Label variant='label' text='Select Video to Upload' />
           <input
             className='form-control'
             type='file'
@@ -69,11 +80,11 @@ const UploadVideo = () => {
             }}
           />
 
-          <Label text='Add Comma Separated Tags' />
           <input
             className='form-control'
             type='text'
             id='tags'
+            placeholder='Add Comma Separated Tags'
             onChange={(e) => {
               setChips(e.target.value);
             }}
