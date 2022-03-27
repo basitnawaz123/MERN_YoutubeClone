@@ -6,11 +6,15 @@ const {
   likeVideo,
   fetchLikedVideos,
   searchByTag,
+  videoLikeStatus,
+  watchLater,
+  fetchUserLikedVideos,
+  deleteVideo,
 } = require("../controllers/videos");
 var express = require("express");
 const multer = require("multer");
 const path = require("path");
-
+const { requireAuth } = require("../middleware/checkAuth");
 var router = express.Router();
 
 var storage = multer.diskStorage({
@@ -40,10 +44,16 @@ let multipleUploads = upload.fields([{ name: "thumbnail" }, { name: "video" }]);
 
 router.get("/videos", listVideos);
 router.get("/search", searchVideo);
-router.post("/videos", multipleUploads, uploadVideo);
+router.post("/videos", requireAuth, multipleUploads, uploadVideo);
+router.delete("/videos/:id", requireAuth, deleteVideo);
 router.get("/videos/:id", singleVideo);
-router.post("/video/like", likeVideo);
-router.get("/video/like", fetchLikedVideos);
+router.post("/video/like", requireAuth, likeVideo);
+router.get("/video/like", requireAuth, fetchLikedVideos);
+router.get("/video/Userliked", requireAuth, fetchUserLikedVideos);
+
+router.get("/video/likestatus", requireAuth, videoLikeStatus);
+router.post("/video/watch_later", requireAuth, watchLater);
+
 router.get("/video/:tag", searchByTag);
 
 

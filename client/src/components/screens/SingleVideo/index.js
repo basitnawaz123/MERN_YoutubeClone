@@ -12,12 +12,14 @@ const SingleVideo = () => {
   const [tags, SetTags] = useState("");
   var watchedVideos = JSON.parse(localStorage.getItem("watchedVideos") || "[]");
   let { id } = useParams();
-
+  
   const fetchVideo = async () => {
     const data = await axios.get(`http://localhost:4000/api/videos/${id}`);
     dispatch(ListSingleVideo(data));
     SetTags(data.data.tags);
+
     watchedVideos.push(data.data);
+
     localStorage.setItem("watchedVideos", JSON.stringify(watchedVideos));
   };
 

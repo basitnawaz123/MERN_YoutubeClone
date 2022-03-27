@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./style.css";
 
 const MenuList = (props) => {
@@ -8,12 +8,15 @@ const MenuList = (props) => {
     <Fragment>
       {items.map((item) => {
         return (
-          <Link to={item.link} key={item.id}>
+          <NavLink
+            to={item.link}
+            key={item.id}
+            className={(navData) => (navData.isActive ? "active" : "link")}>
             <div className='menu_link'>
               <i className='menu_icon'>{item.icon}</i>
               <span>{item.title}</span>
             </div>
-          </Link>
+          </NavLink>
         );
       })}
     </Fragment>

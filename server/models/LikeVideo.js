@@ -13,6 +13,12 @@ const LikeSchema = mongoose.Schema(
       ref: "videos",
     },
 
+    likedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "users",
+    },
+
     count: {
       type: Number,
     },

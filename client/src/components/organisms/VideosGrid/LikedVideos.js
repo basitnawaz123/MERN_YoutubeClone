@@ -1,26 +1,39 @@
 import axios from "axios";
 import moment from "moment";
 import React, { Fragment, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import TagsBar from "../TagsBar";
-
 const LikedVideos = () => {
-  const [videos, SetVideos] = useState([]);
-  useEffect(async () => {
-    const result = await axios.get("http://localhost:4000/api/video/like");
-    SetVideos(result.data);
+  const { auth, likedVideos } = useSelector((state) => state);
+  const [loading, SetLoading] = useState(true);
+  const [myLikedVideos, SetMyLikedVideos] = useState([]);
+  const fetchLikedVideos = async () => {
+    const result = await axios.get(
+      `http://localhost:4000/api/video/Userliked?user=${auth._id}`,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: auth.token,
+        },
+      }
+    );
+    if (result) {
+      SetMyLikedVideos(result.data);
+      SetLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchLikedVideos();
   }, []);
 
   return (
     <Fragment>
       <div className='home'>
-        {/* <div className='tags_bar'>
-          <TagsBar />
-        </div> */}
         <div className='videoGrid'>
-          {videos &&
-            videos.map((item) => {
+          {myLikedVideos.length > 0 ? "" : "No didn't liked any video yet"}
+          {Array.isArray(myLikedVideos) &&
+            myLikedVideos.map((item) => {
               return (
                 <Link to={`/video/${item.video._id}`} key={item.video.title}>
                   <div className='videos__container'>
