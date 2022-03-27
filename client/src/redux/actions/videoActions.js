@@ -6,6 +6,7 @@ import {
   SET_LIKED_VIDEOS,
   DELETE_VIDEO,
   SET_MY_VIDEOS,
+  SET_SAVED_VIDEOS,
 } from "../constants/videoConstants";
 
 export const ListVideos = () => {
@@ -51,5 +52,12 @@ export const ListLikedVideos = (likedVideos) => {
   return {
     type: LIST_LIKED_VIDEOS,
     payload: likedVideos,
+  };
+};
+
+export const SetSavedVideos = (savedVideos) => {
+  return {
+    type: SET_SAVED_VIDEOS,
+    payload: savedVideos,
   };
 };

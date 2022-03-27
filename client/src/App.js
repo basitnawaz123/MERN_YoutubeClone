@@ -8,7 +8,7 @@ import Dashboard from "./components/templates/Layout/Dashboard";
 import DetailsVideo from "./components/templates/Layout/SingleVideo";
 import UserLogin from "./components/screens/Auth/UserLogin";
 import { loadUser } from "./redux/actions/authActions";
-import { SetLikedVideos } from "./redux/actions/videoActions";
+import { SetLikedVideos, SetSavedVideos } from "./redux/actions/videoActions";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -19,6 +19,7 @@ const App = () => {
   useEffect(() => {
     dispatch(loadUser(token));
     dispatch(SetLikedVideos());
+    dispatch(SetSavedVideos());
   }, [dispatch]);
   return (
     <Fragment>

@@ -3,7 +3,7 @@ const videoModel = require("../models/Videos");
 const LikeModel = require("../models/LikeVideo");
 var path = require("path");
 const fs = require("fs");
-const WatchLater = require("../models/WatchLater");
+const WatchLaterModel = require("../models/WatchLater");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 
@@ -118,20 +118,6 @@ const fetchUserLikedVideos = async (req, res) => {
   }
 };
 
-const videoLikeStatus = async (req, res) => {
-  try {
-    const { video_id, user_id } = req.body;
-
-    const result = await LikeModel.find({
-      video: video_id,
-      likedBy: user_id,
-    });
-    res.send(result);
-  } catch (error) {
-    res.send(error.message);
-  }
-};
-
 const searchByTag = async (req, res) => {
   try {
     const { tag } = req.params;
@@ -154,15 +140,30 @@ const searchByTag = async (req, res) => {
 
 // watch later
 
-const watchLater = (req, res) => {
-  const { user, video } = req.body;
-  const data = new WatchLater({
-    video,
-    user,
-  });
+const watchLater = async (req, res) => {
+  const { video_id, user } = req.body;
+  const isAvailable = await WatchLaterModel.find({ video: video_id, user });
+  if (isAvailable.length == 0) {
+    let data = new WatchLaterModel({
+      watchLater: true,
+      video: video_id,
+      user,
+    });
+    await data.save();
+    res.status(200).json({ message: "Video Saved" });
+  }
+};
 
-  data.save();
-  res.send("Saved");
+const fetchUserSavedVideos = async (req, res) => {
+  try {
+    const result = await WatchLaterModel.find({
+      user: req.query.user,
+    }).populate("video");
+
+    res.status(200).send(result);
+  } catch (error) {
+    res.send(error.message);
+  }
 };
 
 module.exports = {
@@ -173,8 +174,8 @@ module.exports = {
   likeVideo,
   fetchLikedVideos,
   searchByTag,
-  videoLikeStatus,
   watchLater,
   fetchUserLikedVideos,
   deleteVideo,
+  fetchUserSavedVideos,
 };

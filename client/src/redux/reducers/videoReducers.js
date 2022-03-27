@@ -5,6 +5,7 @@ import {
   LIST_VIDEOS,
   SET_LIKED_VIDEOS,
   SET_MY_VIDEOS,
+  SET_SAVED_VIDEOS,
   SET_VIDEOS,
 } from "../constants/videoConstants";
 
@@ -12,6 +13,7 @@ const intialState = {
   videos: [],
   myVideos: [],
   liked: [],
+  savedVideos: [],
 };
 
 export const videosReducer = (state = intialState, { type, payload }) => {
@@ -20,6 +22,8 @@ export const videosReducer = (state = intialState, { type, payload }) => {
       return { ...state, videos: payload };
     case SET_MY_VIDEOS:
       return { ...state, myVideos: payload };
+    case SET_SAVED_VIDEOS:
+      return { ...state, savedVideos: payload };
     case DELETE_VIDEO:
       return {
         ...state,

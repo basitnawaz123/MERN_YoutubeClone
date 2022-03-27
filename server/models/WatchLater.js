@@ -13,6 +13,10 @@ const WatchLaterSchema = mongoose.Schema(
       required: true,
       ref: "users",
     },
+
+    watchLater: {
+      type: Boolean,
+    },
   },
   {
     timestamps: true,

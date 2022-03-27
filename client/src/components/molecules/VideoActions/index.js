@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import TypoGraphy from "../../atoms/Typography";
 import "./style.css";
 import {
+  MdOutlinePlaylistAdd,
+  MdOutlinePlaylistAddCheck,
   MdPlaylistAdd,
   MdShare,
   MdThumbDown,
@@ -22,7 +24,11 @@ const VideoAction = (props) => {
     isLiked: "",
     video_id: "",
   });
-  const dispatch = useDispatch();
+
+  const [saveVideo, SetSaveVideo] = useState({
+    isSaved: "",
+    video_id: "",
+  });
 
   const handleLike = async (e) => {
     e.preventDefault();
@@ -68,8 +74,54 @@ const VideoAction = (props) => {
     }
   };
 
+  // Watch Later
+
+  const addToWatchLater = async (e) => {
+    e.preventDefault();
+    if (!auth._id) {
+      alert("Only logged In Users can Save Videos");
+    } else {
+      const result = await axios.post(
+        "http://localhost:4000/api/video/watch_later",
+        {
+          video_id: id,
+          user: auth._id,
+        },
+        {
+          headers: {
+            Authorization: auth.token,
+          },
+        }
+      );
+      if (result.status === 200) {
+        console.log(result);
+        SetSaveVideo({ isSaved: true });
+      }
+    }
+  };
+
+  const fetchSavedVideos = async () => {
+    if (auth.token) {
+      const result = await axios.get(
+        `http://localhost:4000/api/video/watch_later?user=${auth._id}`,
+        {
+          headers: {
+            Authorization: auth.token,
+          },
+        }
+      );
+
+      if (result) {
+        console.log(result);
+        if (result.data[0].video === id) {
+          SetSaveVideo({ isSaved: true, video_id: id });
+        }
+      }
+    }
+  };
   useEffect(() => {
     fetchLikedVideos();
+    fetchSavedVideos();
   }, []);
 
   // console.log(like);
@@ -96,8 +148,12 @@ const VideoAction = (props) => {
             </a>
           </li>
           <li>
-            <a>
-              <MdPlaylistAdd />
+            <a onClick={saveVideo.isSaved ? "" : addToWatchLater}>
+              {saveVideo.isSaved ? (
+                <MdOutlinePlaylistAddCheck />
+              ) : (
+                <MdOutlinePlaylistAdd />
+              )}
             </a>
           </li>
         </ul>
