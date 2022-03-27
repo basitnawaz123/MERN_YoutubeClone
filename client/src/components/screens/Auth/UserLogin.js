@@ -30,10 +30,11 @@ const UserLogin = () => {
           setUser({ name: "", email: "", password: "" });
           setShowLogin(true);
           setShowReg(false);
+          setValidationError();
         }
       })
       .catch((error) => {
-        console.log(error.response);
+        setValidationError(JSON.stringify(error.response.data));
       });
   };
   const handleLogin = async (e) => {
@@ -100,7 +101,7 @@ const UserLogin = () => {
           <div className={`tab_content ${showReg ? "" : "d-none"}`}>
             <form onSubmit={handleRegister}>
               <Label variant='label' text='Register' />
-              <Label variant='label-danger' text={validationError} />
+              {/* <Label variant='label-danger' text={validationError} /> */}
               <input
                 className='form-control'
                 type='text'
