@@ -7,6 +7,7 @@ import VideosGrid from "../../../organisms/VideosGrid";
 import LikedVideos from "../../../organisms/VideosGrid/LikedVideos";
 import History from "../../../screens/History";
 import Library from "../../../screens/Library";
+import WatchLater from "../../../screens/WL";
 import YourVideos from "../../../screens/YourVideos";
 import "./style.css";
 const Dashboard = () => {
@@ -42,6 +43,8 @@ const Dashboard = () => {
               </ProtectedRoute>
             }
           />
+
+          <Route path='/watch-later' element={<WatchLater />} />
         </Routes>
       </div>
     </Fragment>

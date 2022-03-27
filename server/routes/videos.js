@@ -6,10 +6,10 @@ const {
   likeVideo,
   fetchLikedVideos,
   searchByTag,
-  videoLikeStatus,
   watchLater,
   fetchUserLikedVideos,
   deleteVideo,
+  fetchUserSavedVideos,
 } = require("../controllers/videos");
 var express = require("express");
 const multer = require("multer");
@@ -51,8 +51,9 @@ router.post("/video/like", requireAuth, likeVideo);
 router.get("/video/like", requireAuth, fetchLikedVideos);
 router.get("/video/Userliked", requireAuth, fetchUserLikedVideos);
 
-router.get("/video/likestatus", requireAuth, videoLikeStatus);
 router.post("/video/watch_later", requireAuth, watchLater);
+router.get("/video/watch_later", requireAuth, fetchUserSavedVideos);
+
 
 router.get("/video/:tag", searchByTag);
 
