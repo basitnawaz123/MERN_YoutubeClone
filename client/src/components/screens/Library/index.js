@@ -5,9 +5,11 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import LikedVideos from "../../organisms/VideosGrid/LikedVideos";
+import { useSelector } from "react-redux";
 
 const Library = () => {
   const [videos, SetVideos] = useState([]);
+  const auth = useSelector((state) => state);
   const [likeVideos, SetLikeVideos] = useState([]);
   const fetchWatchedVideos = () => {
     const data = JSON.parse(localStorage.getItem("watchedVideos"));
@@ -15,8 +17,18 @@ const Library = () => {
   };
 
   const fetchLikedVideos = async () => {
-    const result = await axios.get("http://localhost:4000/api/video/like");
-    SetLikeVideos(result);
+    const result = await axios.get(
+      `http://localhost:4000/api/video/Userliked?user=${auth._id}`,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: auth.token,
+        },
+      }
+    );
+    if (result) {
+      SetLikeVideos(result.data);
+    }
   };
 
   useEffect(() => {

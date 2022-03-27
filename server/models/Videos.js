@@ -6,6 +6,11 @@ const VideosSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter video title"],
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "users",
+    },
 
     thumbnail: {
       type: String,

@@ -3,14 +3,22 @@
     align-items: center;
     padding: 12px 25px
 }
-
+.active{
+    background-color: #e5e5e5;
+}
+.active .menu_link span{
+    color: black;
+    font-weight: 500;
+}
 .menu_link:hover{
     background-color: #e5e5e5;
     cursor: pointer;
 }
 .menu_link span{
     margin-left: 15px;
-    font-size: 15px;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 16px;
+    line-height: 2rem;
     font-weight: 400;
 }
 

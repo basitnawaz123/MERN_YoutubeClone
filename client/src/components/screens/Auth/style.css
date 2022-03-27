@@ -1,0 +1,48 @@
+.auth_container{
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Roboto";
+    padding-top: 10%;
+}
+.auth_container .tabs{
+    display: flex;
+    justify-content: space-around;
+}
+
+.auth_container .tab_content{
+    padding: 10% 5%;
+    border: 3px solid #e31b1b;
+    border-top: 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.auth_container .tabs button{
+    background: grey;
+    cursor: pointer;
+    padding: 6px;
+    display: block;
+    border: none;
+    color: #fff;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+}
+
+.auth_container .tabs .active{
+    background: #e31b1b;
+
+}
+
+.d-none{
+    display: none;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+}
+
+.auth_container .btn{
+    width: 100%;
+}
