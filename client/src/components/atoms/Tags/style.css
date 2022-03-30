@@ -1,0 +1,18 @@
+.tags{
+    list-style: none;
+    display: flex;
+    /* justify-content: center; */
+}
+
+.tags li{
+    padding: 6px 15px;
+    cursor: pointer;
+    background: #f2eaea;
+    border-radius: 20px;
+    color: black;
+    text-align: center;
+    margin: 0px 10px 10px 0px;
+    border: 1px solid gray;
+    font-weight: 400;
+    font-size: 14px;
+}

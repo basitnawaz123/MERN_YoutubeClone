@@ -1,0 +1,13 @@
+.video_container{
+    display: flex;
+    padding: 30px 50px;
+}
+
+.playlist{
+    flex:1;
+    padding: 4px;
+}
+
+.player{
+    flex:3
+}
